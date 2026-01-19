@@ -1,29 +1,6 @@
 name = "school"
-main = "src/api/index.ts"
 compatibility_date = "2024-01-01"
-compatibility_flags = ["nodejs_compat"]
 
-# Development settings
-[dev]
-port = 8787
-local_protocol = "http"
-
-# D1 Database binding - UNCOMMENT after creating database with:
-# wrangler d1 create nvrss-db
-# Then replace the database_id with the actual ID from the output
-
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "nvrss-db"
-# database_id = "your-actual-d1-database-id-here"
-
-# Environment variables
+# Environment variables for the app
 [vars]
 ENVIRONMENT = "production"
-JWT_SECRET = "your-super-secret-jwt-key-change-in-production"
-SESSION_DURATION_HOURS = "24"
-PASSWORD_MIN_LENGTH = "8"
-
-# Static assets for Pages
-[site]
-bucket = "./dist"
