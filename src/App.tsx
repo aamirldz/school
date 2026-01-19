@@ -1,14 +1,14 @@
 /**
  * NVRSS ERP - Main Application
- * Root component with routing configuration
+ * CUIMS-style multi-portal routing with role-specific dashboards
  */
 
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
-// Pages
-import Login from './pages/Login';
+// Public Pages
+import Home from './pages/Home';
+import RoleLogin from './pages/RoleLogin';
 import ChangePassword from './pages/ChangePassword';
 import AdmissionForm from './pages/public/AdmissionForm';
 
@@ -17,6 +17,12 @@ import AdminDashboard from './pages/admin/Dashboard';
 import Admissions from './pages/admin/Admissions';
 import Students from './pages/admin/Students';
 import Users from './pages/admin/Users';
+
+// Student Pages
+import StudentDashboard from './pages/student/Dashboard';
+
+// Teacher Pages
+import TeacherDashboard from './pages/teacher/Dashboard';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
@@ -38,12 +44,21 @@ function ProtectedRoute({
     return (
       <div className="loading-screen">
         <div className="spinner spinner-lg"></div>
+        <style>{`
+          .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-body);
+          }
+        `}</style>
       </div>
     );
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (user?.mustChangePassword) {
@@ -148,10 +163,44 @@ function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/login/:role" element={<RoleLogin />} />
       <Route path="/admission" element={<AdmissionForm />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
+
+      {/* Student Portal */}
+      <Route
+        path="/student/*"
+        element={
+          <ProtectedRoute allowedRoles={['student']}>
+            <StudentDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Teacher Portal */}
+      <Route
+        path="/teacher/*"
+        element={
+          <ProtectedRoute allowedRoles={['teacher']}>
+            <TeacherDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Staff Portal - Uses Admin Layout */}
+      <Route
+        path="/staff/*"
+        element={
+          <ProtectedRoute allowedRoles={['staff']}>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<AdminDashboard />} />
+      </Route>
 
       {/* Admin Dashboard Routes */}
       <Route
@@ -183,8 +232,8 @@ function AppRoutes() {
         />
       </Route>
 
-      {/* Root redirect */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      {/* Legacy login redirect */}
+      <Route path="/login" element={<Navigate to="/" replace />} />
 
       {/* 404 */}
       <Route path="*" element={<NotFound />} />
