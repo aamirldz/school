@@ -4,8 +4,17 @@
  */
 
 import React, { useState } from 'react';
-import { Link, Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { Link, Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+
+// Import child pages
+import TeacherProfile from './Profile';
+import TeacherTimetable from './Timetable';
+import TeacherClasses from './Classes';
+import TeacherAttendance from './Attendance';
+import TeacherStudents from './Students';
+import TeacherGrades from './Grades';
+import TeacherLeave from './Leave';
 
 export default function TeacherDashboard() {
   const { user, logout } = useAuth();
@@ -18,7 +27,6 @@ export default function TeacherDashboard() {
     navigate('/', { replace: true });
   };
 
-  const isMainDashboard = location.pathname === '/teacher/dashboard' || location.pathname === '/teacher';
 
   const navItems = [
     { path: '/teacher/dashboard', icon: 'dashboard', label: 'Dashboard' },
@@ -127,7 +135,18 @@ export default function TeacherDashboard() {
         </header>
 
         <div className="page-content">
-          {isMainDashboard ? <TeacherDashboardHome user={user} /> : <Outlet />}
+          <Routes>
+            <Route index element={<TeacherDashboardHome user={user} />} />
+            <Route path="dashboard" element={<TeacherDashboardHome user={user} />} />
+            <Route path="profile" element={<TeacherProfile />} />
+            <Route path="timetable" element={<TeacherTimetable />} />
+            <Route path="classes" element={<TeacherClasses />} />
+            <Route path="attendance" element={<TeacherAttendance />} />
+            <Route path="students" element={<TeacherStudents />} />
+            <Route path="grades" element={<TeacherGrades />} />
+            <Route path="leave" element={<TeacherLeave />} />
+            <Route path="*" element={<div style={{ padding: '2rem', textAlign: 'center' }}><h2>🚧 Coming Soon</h2><p>This feature is under development.</p></div>} />
+          </Routes>
         </div>
       </main>
 
