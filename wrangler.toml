@@ -1,6 +1,10 @@
 name = "school"
 compatibility_date = "2024-01-01"
 
-# Environment variables for the app
+# Static assets for Pages deployment
+[assets]
+directory = "./dist"
+
+# Environment variables
 [vars]
 ENVIRONMENT = "production"
