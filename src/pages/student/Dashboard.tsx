@@ -4,8 +4,15 @@
  */
 
 import React, { useState } from 'react';
-import { Link, Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { Link, Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+
+// Import child pages
+import StudentProfile from './Profile';
+import StudentAttendance from './Attendance';
+import StudentTimetable from './Timetable';
+import StudentResults from './Results';
+import StudentFees from './Fees';
 
 export default function StudentDashboard() {
   const { user, logout } = useAuth();
@@ -29,7 +36,6 @@ export default function StudentDashboard() {
   };
 
   const studentInfo = parseStudentUid(user?.uid || '');
-  const isMainDashboard = location.pathname === '/student/dashboard' || location.pathname === '/student';
 
   const navItems = [
     { path: '/student/dashboard', icon: 'dashboard', label: 'Dashboard' },
@@ -146,7 +152,16 @@ export default function StudentDashboard() {
 
         {/* Page Content */}
         <div className="page-content">
-          {isMainDashboard ? <StudentDashboardHome studentInfo={studentInfo} user={user} /> : <Outlet />}
+          <Routes>
+            <Route index element={<StudentDashboardHome studentInfo={studentInfo} user={user} />} />
+            <Route path="dashboard" element={<StudentDashboardHome studentInfo={studentInfo} user={user} />} />
+            <Route path="profile" element={<StudentProfile />} />
+            <Route path="attendance" element={<StudentAttendance />} />
+            <Route path="timetable" element={<StudentTimetable />} />
+            <Route path="results" element={<StudentResults />} />
+            <Route path="fees" element={<StudentFees />} />
+            <Route path="*" element={<div style={{ padding: '2rem', textAlign: 'center' }}><h2>🚧 Coming Soon</h2><p>This feature is under development.</p></div>} />
+          </Routes>
         </div>
       </main>
 
