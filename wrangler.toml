@@ -1,10 +1,21 @@
 name = "school"
+main = "src/api/index.ts"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 
-# Static assets for Pages deployment
-[assets]
-directory = "./dist"
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "nvrss-db"
+database_id = "f67be0bb-64db-4b25-a3bc-669a6c52b749"
 
 # Environment variables
 [vars]
 ENVIRONMENT = "production"
+JWT_SECRET = "nvrss-erp-production-secret-key-2024"
+SESSION_DURATION_HOURS = "24"
+PASSWORD_MIN_LENGTH = "8"
+
+# Static assets
+[assets]
+directory = "./dist"
