@@ -167,9 +167,9 @@ CREATE INDEX IF NOT EXISTS idx_audit_log_entity ON audit_log(entity_type, entity
 -- ============================================
 -- SEED DATA (Default Admin)
 -- ============================================
--- Password: Admin@123 (bcrypt hash)
+-- Password: Admin@123 (SHA-256 hash)
 INSERT OR IGNORE INTO users (uid, password_hash, role, is_active, must_change_password, first_name, last_name)
-VALUES ('ADM001', '$2a$10$rQqLqB8vGa0R1vVZ3M8kAeWr5Q0nYz9D4H6J8K2L5M7N0P3R5T7V9', 'admin', 1, 1, 'System', 'Administrator');
+VALUES ('ADM001', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'admin', 1, 1, 'System', 'Administrator');
 
 -- Update ADM sequence
 UPDATE uid_sequences SET last_sequence = 1 WHERE prefix = 'ADM';
