@@ -1,0 +1,40 @@
+{
+  "name": "nvrss-erp",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "wrangler dev src/api/index.ts",
+    "build": "tsc -b && vite build",
+    "build:api": "wrangler deploy src/api/index.ts --dry-run",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "deploy": "npm run build && wrangler pages deploy dist",
+    "db:init": "wrangler d1 execute nvrss-db --file=./database/schema.sql"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.12.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260118.0",
+    "@eslint/js": "^9.39.1",
+    "@hono/zod-validator": "^0.7.6",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "hono": "^4.11.4",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.4",
+    "wrangler": "^4.59.2",
+    "zod": "^4.3.5"
+  }
+}
