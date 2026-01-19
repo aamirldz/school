@@ -1,335 +1,537 @@
 /**
  * NVRSS ERP - Home Portal Page
- * CUIMS-style portal with separate login cards for different user types
+ * Professional portal with blue theme and separate login cards
  */
 
 import { Link } from 'react-router-dom';
 
 export default function Home() {
-    const portals = [
-        {
-            id: 'student',
-            title: 'Student/Parent Login',
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+  const portals = [
+    {
+      id: 'student',
+      title: 'Student / Parent Login',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+      ),
+      description: 'Access your academic portal to view attendance, results, timetable, fee details and more.',
+      link: '/login/student',
+    },
+    {
+      id: 'teacher',
+      title: 'Teacher Login',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+      ),
+      description: 'Manage your classes, mark attendance, enter grades and view your teaching schedule.',
+      link: '/login/teacher',
+    },
+    {
+      id: 'staff',
+      title: 'Staff Login',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      ),
+      description: 'Access staff services, manage records, and view administrative functions.',
+      link: '/login/staff',
+    },
+    {
+      id: 'admission',
+      title: 'Admission Login',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="12" y1="18" x2="12" y2="12"></line>
+          <line x1="9" y1="15" x2="15" y2="15"></line>
+        </svg>
+      ),
+      description: 'Process admission applications, review documents and manage student enrollments.',
+      link: '/login/admission',
+    },
+  ];
+
+  return (
+    <div className="home-page">
+      {/* Header */}
+      <header className="home-header">
+        <div className="header-content">
+          <div className="logo-section">
+            <div className="logo">
+              <span>NV</span>
+            </div>
+            <div className="logo-text">
+              <h1>NVRSS</h1>
+              <p>New Vision Residential Secondary School</p>
+            </div>
+          </div>
+          <nav className="header-nav">
+            <Link to="/admission" className="nav-link">New Admission</Link>
+            <a href="#contact" className="nav-link">Contact Us</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <h2>School Management System</h2>
+          <p>Complete digital platform for students, teachers, and staff</p>
+        </div>
+      </section>
+
+      {/* Portal Cards */}
+      <main className="portal-section">
+        <div className="portal-grid">
+          {portals.map((portal) => (
+            <div key={portal.id} className="portal-card">
+              <div className="portal-icon">{portal.icon}</div>
+              <h3 className="portal-title">{portal.title}</h3>
+              <p className="portal-description">{portal.description}</p>
+              <Link to={portal.link} className="portal-btn">
+                Login Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
-            ),
-            description: 'Login with your UID and Password to access your Student Services and Account. Track your progress and stay updated.',
-            link: '/login/student',
-            color: 'primary',
-        },
-        {
-            id: 'teacher',
-            title: 'Teacher Login',
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-            ),
-            description: 'Login using your Teacher ID and Password to access class management, attendance, grades, and other academic services.',
-            link: '/login/teacher',
-            color: 'success',
-        },
-        {
-            id: 'staff',
-            title: 'Staff Login',
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-            ),
-            description: 'Login using your Employee Code and Password to access your account, track progress and other official services.',
-            link: '/login/staff',
-            color: 'info',
-        },
-        {
-            id: 'admission',
-            title: 'Admission Login',
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-            ),
-            description: 'For Admission Staff only. Use your Employee Code and Password to log in for admission related services.',
-            link: '/login/admission',
-            color: 'warning',
-        },
-    ];
+              </Link>
+            </div>
+          ))}
+        </div>
+      </main>
 
-    return (
-        <div className="home-page">
-            {/* Header */}
-            <header className="home-header">
-                <div className="home-logo">
-                    <div className="logo-circle">
-                        <span>NV</span>
-                    </div>
-                    <div className="logo-text">
-                        <span className="logo-name">NVRSS</span>
-                        <span className="logo-tagline">New Vision Residential Secondary School</span>
-                        <span className="logo-system">School Management System</span>
-                    </div>
-                </div>
-            </header>
+      {/* Features Section */}
+      <section className="features-section">
+        <h3>Why Choose Our System?</h3>
+        <div className="features-grid">
+          <div className="feature">
+            <div className="feature-icon">📊</div>
+            <h4>Real-time Analytics</h4>
+            <p>Track attendance, grades and performance in real-time</p>
+          </div>
+          <div className="feature">
+            <div className="feature-icon">🔒</div>
+            <h4>Secure Access</h4>
+            <p>Role-based access with secure authentication</p>
+          </div>
+          <div className="feature">
+            <div className="feature-icon">📱</div>
+            <h4>Mobile Friendly</h4>
+            <p>Access from any device, anywhere, anytime</p>
+          </div>
+          <div className="feature">
+            <div className="feature-icon">⚡</div>
+            <h4>Fast & Reliable</h4>
+            <p>Lightning-fast performance with 99.9% uptime</p>
+          </div>
+        </div>
+      </section>
 
-            {/* Portal Cards */}
-            <main className="home-main">
-                <div className="portal-grid">
-                    {portals.map((portal) => (
-                        <div key={portal.id} className={`portal-card portal-${portal.color}`}>
-                            <div className="portal-icon">{portal.icon}</div>
-                            <h2 className="portal-title">{portal.title}</h2>
-                            <p className="portal-description">{portal.description}</p>
-                            <Link to={portal.link} className={`portal-btn btn-${portal.color}`}>
-                                Login Now
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+      {/* Quick Links */}
+      <section className="quick-section">
+        <Link to="/admission" className="quick-link primary">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+          Apply for New Admission
+        </Link>
+      </section>
 
-                {/* Quick Links */}
-                <div className="quick-links">
-                    <Link to="/admission" className="quick-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                            <line x1="8" y1="12" x2="16" y2="12"></line>
-                        </svg>
-                        New Admission Application
-                    </Link>
-                    <a href="#contact" className="quick-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        </svg>
-                        Contact Support
-                    </a>
-                </div>
-            </main>
+      {/* Footer */}
+      <footer className="home-footer">
+        <div className="footer-content">
+          <div className="footer-info">
+            <div className="footer-logo">
+              <div className="logo small"><span>NV</span></div>
+              <span>NVRSS</span>
+            </div>
+            <p>New Vision Residential Secondary School</p>
+            <p className="address">123 Education Street, Knowledge City</p>
+          </div>
+          <div className="footer-links">
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>&copy; 2025 NVRSS. All Rights Reserved.</p>
+        </div>
+      </footer>
 
-            {/* Footer */}
-            <footer className="home-footer">
-                <div className="footer-info">
-                    <p>&copy; 2025 New Vision Residential Secondary School. All Rights Reserved.</p>
-                </div>
-            </footer>
+      <style>{`
+        * { box-sizing: border-box; }
 
-            {/* Styles */}
-            <style>{`
         .home-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #b91c1c 0%, #dc2626 50%, #991b1b 100%);
+          background: #f8fafc;
           display: flex;
           flex-direction: column;
         }
 
         .home-header {
-          padding: var(--spacing-8) var(--spacing-4);
-          display: flex;
-          justify-content: center;
-        }
-
-        .home-logo {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-4);
-        }
-
-        .logo-circle {
-          width: 80px;
-          height: 80px;
           background: white;
-          border-radius: 50%;
+          border-bottom: 1px solid #e2e8f0;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+        }
+
+        .header-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 1rem 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo-section {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .logo {
+          width: 56px;
+          height: 56px;
+          background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 4px solid #dc2626;
+          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
         }
 
-        .logo-circle span {
-          font-size: 2rem;
+        .logo span {
+          font-size: 1.5rem;
           font-weight: 800;
-          color: #dc2626;
-        }
-
-        .logo-text {
-          display: flex;
-          flex-direction: column;
           color: white;
         }
 
-        .logo-name {
-          font-size: 2.5rem;
-          font-weight: 800;
-          letter-spacing: -0.02em;
+        .logo.small {
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
         }
 
-        .logo-tagline {
-          font-size: 0.875rem;
+        .logo.small span {
+          font-size: 1rem;
+        }
+
+        .logo-text h1 {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1e40af;
+          margin: 0;
+        }
+
+        .logo-text p {
+          font-size: 0.75rem;
+          color: #64748b;
+          margin: 0;
+        }
+
+        .header-nav {
+          display: flex;
+          gap: 1.5rem;
+        }
+
+        .nav-link {
+          color: #64748b;
+          text-decoration: none;
+          font-size: 0.9rem;
+          font-weight: 500;
+          transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+          color: #1e40af;
+        }
+
+        .hero-section {
+          background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+          color: white;
+          padding: 4rem 2rem;
+          text-align: center;
+        }
+
+        .hero-content h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+        }
+
+        .hero-content p {
+          font-size: 1.125rem;
           opacity: 0.9;
         }
 
-        .logo-system {
-          font-size: 0.75rem;
-          opacity: 0.7;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-        }
-
-        .home-main {
-          flex: 1;
-          padding: var(--spacing-4);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: var(--spacing-8);
+        .portal-section {
+          max-width: 1400px;
+          margin: -3rem auto 0;
+          padding: 0 2rem 3rem;
+          position: relative;
+          z-index: 10;
         }
 
         .portal-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: var(--spacing-6);
-          max-width: 1200px;
-          width: 100%;
+          gap: 1.5rem;
         }
 
         .portal-card {
           background: white;
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-6);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+          border-radius: 16px;
+          padding: 2rem;
           text-align: center;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          border: 1px solid #e2e8f0;
         }
 
         .portal-card:hover {
           transform: translateY(-8px);
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 12px 40px rgba(30, 64, 175, 0.2);
+          border-color: #3b82f6;
         }
 
         .portal-icon {
-          width: 80px;
-          height: 80px;
-          border-radius: var(--radius-lg);
+          width: 72px;
+          height: 72px;
+          margin: 0 auto 1.5rem;
+          background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+          border-radius: 16px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: var(--spacing-4);
-          background: var(--color-neutral-100);
-          color: var(--text-primary);
+          padding: 1rem;
         }
 
-        .portal-primary .portal-icon { background: #fee2e2; color: #dc2626; }
-        .portal-success .portal-icon { background: #dcfce7; color: #16a34a; }
-        .portal-info .portal-icon { background: #dbeafe; color: #2563eb; }
-        .portal-warning .portal-icon { background: #fef3c7; color: #d97706; }
+        .portal-icon svg {
+          width: 100%;
+          height: 100%;
+          color: #1e40af;
+        }
 
         .portal-title {
           font-size: 1.125rem;
-          font-weight: 700;
-          margin-bottom: var(--spacing-3);
-          color: var(--text-primary);
+          font-weight: 600;
+          color: #1e293b;
+          margin-bottom: 0.75rem;
         }
 
         .portal-description {
           font-size: 0.875rem;
-          color: var(--text-secondary);
+          color: #64748b;
           line-height: 1.6;
-          margin-bottom: var(--spacing-5);
-          flex: 1;
+          margin-bottom: 1.5rem;
+          min-height: 60px;
         }
 
         .portal-btn {
-          display: inline-block;
-          padding: var(--spacing-3) var(--spacing-6);
-          border-radius: var(--radius-md);
-          font-weight: 600;
-          font-size: 0.875rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+          color: white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 10px;
           text-decoration: none;
-          transition: all 0.2s ease;
+          font-weight: 600;
+          font-size: 0.9rem;
+          transition: all 0.2s;
         }
 
-        .btn-primary { background: #dc2626; color: white; }
-        .btn-primary:hover { background: #b91c1c; }
-        .btn-success { background: #16a34a; color: white; }
-        .btn-success:hover { background: #15803d; }
-        .btn-info { background: #2563eb; color: white; }
-        .btn-info:hover { background: #1d4ed8; }
-        .btn-warning { background: #d97706; color: white; }
-        .btn-warning:hover { background: #b45309; }
+        .portal-btn:hover {
+          transform: translateX(4px);
+          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
 
-        .quick-links {
-          display: flex;
-          gap: var(--spacing-4);
+        .features-section {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 3rem 2rem;
+          text-align: center;
+        }
+
+        .features-section h3 {
+          font-size: 1.5rem;
+          color: #1e293b;
+          margin-bottom: 2rem;
+        }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
+        }
+
+        .feature {
+          padding: 1.5rem;
+          background: white;
+          border-radius: 12px;
+          border: 1px solid #e2e8f0;
+        }
+
+        .feature-icon {
+          font-size: 2rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .feature h4 {
+          font-size: 1rem;
+          color: #1e293b;
+          margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+          font-size: 0.875rem;
+          color: #64748b;
+        }
+
+        .quick-section {
+          text-align: center;
+          padding: 2rem;
         }
 
         .quick-link {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: var(--spacing-2);
-          padding: var(--spacing-3) var(--spacing-5);
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: var(--radius-full);
-          color: white;
-          font-size: 0.875rem;
-          font-weight: 500;
+          gap: 0.75rem;
+          padding: 1rem 2rem;
+          border-radius: 12px;
           text-decoration: none;
-          transition: all 0.2s ease;
+          font-weight: 600;
+          transition: all 0.2s;
         }
 
-        .quick-link:hover {
-          background: rgba(255, 255, 255, 0.2);
+        .quick-link.primary {
+          background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+          color: white;
+          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        .quick-link.primary:hover {
           transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
         }
 
         .home-footer {
-          padding: var(--spacing-4);
-          text-align: center;
-          color: rgba(255, 255, 255, 0.7);
+          margin-top: auto;
+          background: #1e293b;
+          color: white;
+        }
+
+        .footer-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+
+        .footer-logo {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .footer-logo span {
+          font-size: 1.25rem;
+          font-weight: 700;
+        }
+
+        .footer-info p {
+          color: #94a3b8;
+          font-size: 0.875rem;
+          margin: 0.25rem 0;
+        }
+
+        .footer-info .address {
           font-size: 0.75rem;
         }
 
-        @media (max-width: 1024px) {
-          .portal-grid {
+        .footer-links {
+          display: flex;
+          gap: 2rem;
+        }
+
+        .footer-links a {
+          color: #94a3b8;
+          text-decoration: none;
+          font-size: 0.875rem;
+          transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+          color: white;
+        }
+
+        .footer-bottom {
+          border-top: 1px solid #334155;
+          padding: 1rem 2rem;
+          text-align: center;
+        }
+
+        .footer-bottom p {
+          color: #64748b;
+          font-size: 0.75rem;
+          margin: 0;
+        }
+
+        @media (max-width: 1200px) {
+          .portal-grid, .features-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
-        @media (max-width: 640px) {
-          .portal-grid {
+        @media (max-width: 768px) {
+          .header-content {
+            flex-direction: column;
+            gap: 1rem;
+          }
+
+          .hero-content h2 {
+            font-size: 1.75rem;
+          }
+
+          .portal-grid, .features-grid {
             grid-template-columns: 1fr;
           }
 
-          .home-logo {
-            flex-direction: column;
-            text-align: center;
+          .portal-section {
+            margin-top: -2rem;
           }
 
-          .logo-text {
-            align-items: center;
+          .footer-content {
+            flex-direction: column;
+            gap: 1.5rem;
           }
 
-          .quick-links {
-            flex-direction: column;
-            width: 100%;
-            max-width: 300px;
+          .footer-links {
+            flex-wrap: wrap;
+            gap: 1rem;
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
