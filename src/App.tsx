@@ -24,6 +24,9 @@ import StudentDashboard from './pages/student/Dashboard';
 // Teacher Pages
 import TeacherDashboard from './pages/teacher/Dashboard';
 
+// Staff Pages
+import StaffDashboard from './pages/staff/Dashboard';
+
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
 
@@ -189,18 +192,15 @@ function AppRoutes() {
         }
       />
 
-      {/* Staff Portal - Uses Admin Layout */}
+      {/* Staff Portal */}
       <Route
         path="/staff/*"
         element={
           <ProtectedRoute allowedRoles={['staff']}>
-            <DashboardLayout />
+            <StaffDashboard />
           </ProtectedRoute>
         }
-      >
-        <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="dashboard" element={<AdminDashboard />} />
-      </Route>
+      />
 
       {/* Admin Dashboard Routes */}
       <Route
